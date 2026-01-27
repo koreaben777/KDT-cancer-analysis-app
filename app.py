@@ -9,14 +9,21 @@ import os
 # 1. 한글 폰트 설정
 # -----------------------------------------------------------
 def set_korean_font():
-    system_name = platform.system()
-    if system_name == 'Darwin': # Mac
-        plt.rcParams['font.family'] = 'AppleGothic'
-    elif system_name == 'Windows': # Windows
-        plt.rcParams['font.family'] = 'Malgun Gothic'
-    else: # Linux (Streamlit Cloud 등)
-        plt.rcParams['font.family'] = 'NanumGothic'
-    plt.rcParams['axes.unicode_minus'] = False
+    # 폰트 파일 경로 (app.py와 같은 폴더에 NanumGothic.ttf 가 있어야 함)
+    font_path = 'NanumGothic.ttf' 
+    
+    # 폰트 파일이 실제로 있는지 확인
+    if os.path.exists(font_path):
+        # 폰트 매니저에 폰트 추가
+        fm.fontManager.addfont(font_path)
+        # 폰트 이름 가져오기
+        font_name = fm.FontProperties(fname=font_path).get_name()
+        # Matplotlib의 기본 폰트로 설정
+        plt.rcParams['font.family'] = font_name
+        plt.rcParams['axes.unicode_minus'] = False # 마이너스 깨짐 방지
+    else:
+        # 폰트 파일이 없을 경우 에러 메시지 출력 대신 기본 설정 유지
+        st.error("폰트 파일을 찾을 수 없습니다. NanumGothic.ttf 파일을 프로젝트 폴더에 넣어주세요.")
 
 set_korean_font()
 

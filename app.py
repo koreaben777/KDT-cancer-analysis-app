@@ -139,7 +139,7 @@ df_death = load_death_data()
 # 4. 메인 화면 및 옵션
 # -----------------------------------------------------------
 st.title('연도/암종 별 암 발생률 및 사망률 히트맵')
-st.markdown('사망률의 경우 발병 후 5년 내 사망 기준입니다.')
+st.markdown('조발생률이란 해당 연도에 인구 10만 명당 발병자 수입니다. 또한 사망률의 경우 발병 후 5년 내 사망 기준입니다.')
 
 if df_inc is None or df_death is None:
     st.error("❌ 데이터 파일을 읽을 수 없습니다. (Reboot App을 시도해보세요)")
@@ -147,7 +147,7 @@ if df_inc is None or df_death is None:
 
 data_option = st.selectbox(
     "확인할 지표를 선택하세요:",
-    ["조발생률 (Incidence Rate)", "사망률 (Death Rate)"]
+    ["조발생률", "사망률"]
 )
 
 if data_option.startswith("조발생률"):

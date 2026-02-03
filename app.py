@@ -49,7 +49,8 @@ set_korean_font()
 # (1) 조발생률 데이터 로드
 @st.cache_data
 def load_incidence_data():
-    filename = '국립암센터_암발생 통계 정보_20260120.csv'
+    # [수정] 파일 이름을 영어로 변경
+    filename = 'data_incidence.csv' 
     if not os.path.exists(filename):
         return None
 
@@ -70,7 +71,8 @@ def load_incidence_data():
 # (2) 사망률 데이터 로드 및 이름 매핑
 @st.cache_data
 def load_death_data():
-    filename = '국가별_연도별_암종별_사망률.csv'
+    # [수정] 파일 이름을 영어로 변경
+    filename = 'data_death.csv'
     if not os.path.exists(filename):
         return None
 
@@ -78,10 +80,7 @@ def load_death_data():
         df = pd.read_csv(filename, encoding='euc-kr')
     except:
         df = pd.read_csv(filename, encoding='utf-8')
-
-    if '국가' in df.columns:
-        df = df[df['국가'].str.contains('한국|대한민국', na=False)]
-
+        
     # [핵심 수정] 사망률 데이터의 암종 이름을 조발생률 데이터와 맞춤
     rename_map = {
         '기관·기관지·폐암': '폐암',

@@ -139,6 +139,7 @@ df_death = load_death_data()
 # 4. 메인 화면 및 옵션
 # -----------------------------------------------------------
 st.title('연도/암종 별 암 발생률 및 사망률 히트맵')
+st.markdown('사망률의 경우 발병 후 5년 내 사망 기준입니다.')
 
 if df_inc is None or df_death is None:
     st.error("❌ 데이터 파일을 읽을 수 없습니다. (Reboot App을 시도해보세요)")
